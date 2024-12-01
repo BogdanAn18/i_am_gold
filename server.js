@@ -1,1 +1,1 @@
-//hello to all
+console.log('Hello to all!')
