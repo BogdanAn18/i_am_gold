@@ -1,1 +1,1 @@
-# i_am_gold
+# Math project
