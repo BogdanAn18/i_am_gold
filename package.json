@@ -1,0 +1,26 @@
+{
+  "name": "abmath",
+  "version": "1.0.0",
+  "description": "Math is great!",
+  "main": "server.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BogdanAn18/i_am_gold.git"
+  },
+  "keywords": [
+    "gold",
+    "math"
+  ],
+  "author": "Anokhin B.S.",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BogdanAn18/i_am_gold/issues"
+  },
+  "homepage": "https://github.com/BogdanAn18/i_am_gold#readme",
+  "dependencies": {
+    "express": "^4.21.1"
+  }
+}
