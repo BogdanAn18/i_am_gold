@@ -21,6 +21,8 @@
   },
   "homepage": "https://github.com/BogdanAn18/i_am_gold#readme",
   "dependencies": {
-    "express": "^4.21.2"
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "sqlite3": "^5.1.7"
   }
 }
