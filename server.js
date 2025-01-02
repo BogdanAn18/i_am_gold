@@ -24,7 +24,7 @@ app.use(express.static("public"));
 
 //! БЛОК РЕНДЕРА
 app.get("/", function (req, res) {
-  res.render("pages/main");
+  res.render("pages/reg");
 });
 
 app.listen(port, () => {
