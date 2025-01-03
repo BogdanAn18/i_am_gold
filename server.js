@@ -5,9 +5,10 @@ const port = 3000;
 const sqlite3 = require("sqlite3").verbose();
 const db = new sqlite3.Database("db.db");
 
-// app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({ dest: "upload/", extended: false })); 
-//? пара парсеров на будущее
+const bodyParser = require("body-parser");
+app.use(bodyParser.json());  
+app.use(bodyParser.urlencoded({ dest: "upload/", extended: false })); 
+//* заставляет читать body, изначальная библиотека Node.js
 
 app.set("view engine", "ejs"); 
 
@@ -26,6 +27,24 @@ app.use(express.static("public"));
 app.get("/", function (req, res) {
   res.render("pages/reg");
 });
+
+
+//! ОБРАБОТКА ЗАПРОСОВ
+app.post("/reg", (req, res) => {
+  db.all(
+    `INSERT INTO users (name, surname, mail, pass) VALUES (?,?,?,?)`,
+    [req.body.name, req.body.surname, req.body.mail, req.body.pass],
+    (err, row) => {
+      if (err) {
+        console.log(err);
+        res.send("ERR");
+      } else {
+        res.send("OK");
+      }
+    }
+  );
+});
+
 
 app.listen(port, () => {
     console.log(`App listening on port ${port}`);
