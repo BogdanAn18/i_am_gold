@@ -12,6 +12,7 @@
     <title>ABMath</title>
 </head>
 <body>
+    <%- include('../particals/alert'); %>
     <div class="col_log">
         <h1>Вход</h1>
         <h3><em>если вы бывалый зритель</em></h3>
@@ -28,8 +29,7 @@
         <input type="email" id="r_mail"placeholder="Почта">
         <input type="password" id="r_pass" placeholder="Пароль">
         <input type="password" id="r_pass2" placeholder="Повторите пароль">
-        <input type="submit" value="Вперед" onclick="reg()">
-
+        <button type="submit" class="btn" onclick="reg()">Вперед</button>
     </div>
 
     <script src="js/lib.js"></script>

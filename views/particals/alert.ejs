@@ -1,0 +1,60 @@
+<div class="alert" id="alert" aria-hidden="true" hidden>
+
+    <span id="alert_text">Ошибка</span>
+    <button class="alert_close" onclick="Close_Alert()">Закрыть</button>  
+
+</div>
+<div class="alert_shadow" id="alert_shadow" aria-hidden="true" hidden></div>
+
+<style>
+    .alert{
+        width: 60%;
+        margin: 15px 20% 0px 20%;
+        position: absolute;
+        min-height: 40px;
+        background-color: rgb(224, 108, 7);
+        border: 4px rgb(189, 91, 6) solid;
+        padding: 20px;
+        font-family: "Jost", serif;
+        font-optical-sizing: auto;
+        font-weight: 600;
+        font-size: 20px;
+        z-index: 99;
+    }
+
+    .alert_close{
+        font-family: "Jost", serif;
+        font-optical-sizing: auto;
+        font-weight: 300;
+        position: absolute;
+        font-size: 20px;
+        right: 10px;
+        bottom: 10px;
+        background: #000;
+        color: white;
+    }
+
+    .alert_shadow{
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        z-index: 98;
+        opacity: 0.6;
+        background-color: black;
+    }
+</style>
+
+<script>
+    function Alert(text){
+        document.getElementById('alert_text').innerHTML = text;
+        document.getElementById('alert_shadow').hidden = false;
+        document.getElementById('alert').hidden = false;
+    }
+    function Close_Alert(){
+        document.getElementById('alert_shadow').hidden = true;
+        document.getElementById('alert').hidden = true;
+    }
+</script>

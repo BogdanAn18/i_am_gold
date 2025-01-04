@@ -12,11 +12,11 @@ body{
 }
 
 .col_reg{
-    background-color: rgb(213, 100, 1);
+    background-color: rgb(224, 108, 7);
     color: white;
 }
 
-input{
+input, .btn{
     font-family: "Jost", serif;
     font-optical-sizing: auto;
     font-weight: 400;

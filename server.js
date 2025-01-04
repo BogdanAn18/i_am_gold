@@ -23,6 +23,11 @@ app.use(express.static("public"));
 // });
 //? куки на будущее
 
+const { createHmac } = await import('node:crypto');
+//зачем хэш если пароль изначально можно перехватить? только если бд взломают, но зачем?
+//сделаю хэш, чтобы в будущем разместить бд где-то (что понижает уровень безопастности)
+const myhash = createHmac('sha256', 'iAmGold');
+
 //! БЛОК РЕНДЕРА
 app.get("/", function (req, res) {
   res.render("pages/reg");
