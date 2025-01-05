@@ -1,9 +1,11 @@
-body{
+body {
     display: flex;
     flex-direction: row;
     justify-content: center;
 }
-.col_reg, .col_log{
+
+.col_reg,
+.col_log {
     padding: 2%;
     width: 46%;
     display: flex;
@@ -11,12 +13,13 @@ body{
     min-height: calc(96vh - 60px);
 }
 
-.col_reg{
+.col_reg {
     background-color: rgb(224, 108, 7);
     color: white;
 }
 
-input, .btn{
+input,
+.btn {
     font-family: "Jost", serif;
     font-optical-sizing: auto;
     font-weight: 400;
@@ -26,24 +29,30 @@ input, .btn{
     margin-top: 10px;
 }
 
-input[type=text]{
+input[type=text] {
     border: red 3px solid;
     border-radius: 10px;
 }
-input[type=email]{
+
+input[type=email] {
     border: rgb(191, 50, 196) 3px solid;
     border-radius: 15px;
 }
-input[type=password]{
+
+input[type=password] {
     border: black 3px solid;
     border-radius: 0px;
 }
+
 /* input[type=submit]{
     fill: rgb(52, 74, 74);
     border: rgb(6, 184, 6) 3px solid;
     border-radius: 10px;
 } */
 
-h1, h2, h3, h4{
+h1,
+h2,
+h3,
+h4 {
     margin: 0;
 }

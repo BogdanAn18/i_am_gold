@@ -1,7 +1,7 @@
 <div class="alert" id="alert" aria-hidden="true" hidden>
 
     <span id="alert_text">Ошибка</span>
-    <button class="alert_close" onclick="Close_Alert()">Закрыть</button>  
+    <button class="alert_close" id="close_Alert_btn">Закрыть</button>  
 
 </div>
 <div class="alert_shadow" id="alert_shadow" aria-hidden="true" hidden></div>
@@ -48,13 +48,16 @@
 </style>
 
 <script>
-    function Alert(text){
+    function Alert(text, callback = () => {}){
         document.getElementById('alert_text').innerHTML = text;
         document.getElementById('alert_shadow').hidden = false;
         document.getElementById('alert').hidden = false;
-    }
-    function Close_Alert(){
-        document.getElementById('alert_shadow').hidden = true;
-        document.getElementById('alert').hidden = true;
+
+        close_Alert_btn = document.getElementById("close_Alert_btn");
+        close_Alert_btn.addEventListener('click', () => {
+            document.getElementById('alert_shadow').hidden = true;
+            document.getElementById('alert').hidden = true;
+            callback();
+        });
     }
 </script>
