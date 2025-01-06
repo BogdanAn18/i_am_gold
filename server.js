@@ -28,7 +28,7 @@ app.use(express.static("public"));
 
 app.use(session(
   { secret: 'i_still%full_of&gold', 
-    cookie: { maxAge: 60000 },
+    cookie: { maxAge: 900000000 },
     resave: true, //сохраняет на клиенте
     saveUninitialized: false,
   }
@@ -53,7 +53,7 @@ app.get("/", (req, res) => {
       if(err){
           res.send("Внутренняя ошибка")
       }else{
-        res.render("pages/main", {data: row});
+        res.render("pages/main", {data: row[0]});
       }
       
   })

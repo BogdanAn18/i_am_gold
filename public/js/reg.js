@@ -85,8 +85,3 @@ function log() {
         })
     }
 }
-
-
-function islogged() {
-    localStorage
-}
