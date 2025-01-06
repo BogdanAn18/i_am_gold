@@ -26,7 +26,13 @@ app.use(express.static("public"));
 // });
 //? куки на будущее
 
-app.use(session({ secret: 'i_still%full_of&gold', cookie: { maxAge: 60000 } }))
+app.use(session(
+  { secret: 'i_still%full_of&gold', 
+    cookie: { maxAge: 60000 },
+    resave: true, //сохраняет на клиенте
+    saveUninitialized: false,
+  }
+))
 
 //зачем хэш если пароль изначально можно перехватить? только если бд взломают, но зачем?
 //сделаю хэш, чтобы в будущем разместить бд где-то (что понижает уровень безопастности)
@@ -34,15 +40,24 @@ app.use(session({ secret: 'i_still%full_of&gold', cookie: { maxAge: 60000 } }))
 // const { createHmac } = await import('node:crypto');
 // const myhash = createHmac('sha256', 'iAmGold');
 
+//также ввиду того, что uid может быть украден, он храниться через сессии
+
 //! БЛОК РЕНДЕРА
-app.get("/reg", function (req, res) {
-  res.render("pages/reg");
-});
+app.get("/", (req, res) => {
+  if (!req.session.uid) {
+      res.render("pages/reg");
+      return
+    }
 
-app.get("/", function (req, res) {
-  res.render("pages/main");
-});
-
+  db.all("SELECT * FROM users WHERE uid = ?", [req.session.uid], (err,row)=>{
+      if(err){
+          res.send("Внутренняя ошибка")
+      }else{
+        res.render("pages/main", {data: row});
+      }
+      
+  })
+})
 
 //! ОБРАБОТКА ЗАПРОСОВ
 app.post("/reg", (req, res) => {
@@ -70,7 +85,7 @@ app.post('/log', (req, res) => {
       if (row[0]) {
 
         req.session.name = req.body.name
-        req.session.uid = row[0].id
+        req.session.uid = row[0].uid
 
         res.send("OK");
 
@@ -81,24 +96,8 @@ app.post('/log', (req, res) => {
   })
 })
 
-app.get("/getUserInfo", (req, res) => {
-  if (!req.session.uid) {
-      res.send("NO");
-      return
-    }
-
-  db.all("SELECT * FROM users WHERE uid = ?", [req.session.uid], (err,row)=>{
-      if(err){
-          res.send("Внутряння ошибка")
-
-      }else{
-        res.send(row);
-      }
-      
-  })
-})
-
 app.listen(port, () => {
     console.log(`App listening on port ${port}`);
 });
+
 console.log('Time to rest!')
