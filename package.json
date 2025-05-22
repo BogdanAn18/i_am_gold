@@ -1,7 +1,7 @@
 {
-  "name": "abmath",
+  "name": "cube40",
   "version": "1.0.0",
-  "description": "Math is great!",
+  "description": "Physics 40",
   "main": "server.js",
   "scripts": {
     "test": "test"

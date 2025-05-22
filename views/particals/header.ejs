@@ -1,0 +1,120 @@
+<style>
+    .nav{
+        /* background-color: rgb(241, 128, 28); */
+        width: 100vw;
+        position: fixed;
+        display: inline-flex;
+        color: rgb(0, 0, 0);
+        left: 0px;
+        top: 0px;
+        /* box-shadow: 
+            0px 10px rgb(255, 182, 119),
+            0px -10px rgb(255, 182, 119); */
+        font-family: "Jost", serif;
+        font-optical-sizing: auto;
+        font-weight: 800;
+        font-style: normal;
+        font-size: 24px;
+    }
+    .el-h, .li-h{
+        vertical-align: auto;
+        padding: 5px;
+        text-decoration: none;
+        color: black;
+    }
+    .logo{
+        left: 10px;
+    }
+    .menu_icon{
+        position: absolute;
+        right: 10px;
+    }
+    .exit{
+        color: rgb(183, 3, 3);
+    }
+</style>
+<style media="all and (min-width: 700px)">
+    .cntr{
+        display: inline-flex;
+        width: 100%;
+    }
+    .menu{
+        width: 350px;
+        display: inline-flex;
+        margin-left: calc(50vw - 260px);
+        margin-top: 10px;
+        padding: auto;
+    }
+    .menu_icon{
+        display: none;
+    }
+    .exit{
+        position: absolute;
+        right: 10px;
+    }
+</style>
+<style media="all and (max-width: 700px)">
+    .cntr{
+        display: inline-flex;
+    }
+    .menu{
+        display: none;
+    }
+    .menu_icon{
+        display: block;
+        cursor: pointer;
+    }
+    #menuControl {
+        display: none;
+    }
+
+    #menuControl:checked + label > div {
+        width: 100%;
+    }
+
+    .menuBar{
+        background: white;
+        border-left: 15px black solid;
+        height: 100vh;
+        right: -15px;
+        top: 0px;
+        width: 0px;
+        position: fixed;
+        transition: 0.6s;
+        display: block;
+    }
+    .li-h{
+        margin-top: 20px;
+    }
+</style>
+
+
+<div class="nav">
+    <div class="cntr">
+        <div class="el-h">
+            <img src="img/logo.jpg" alt="" srcset="" width="60px">
+        </div>
+        <div class="menu_icon">
+            <input type="checkbox" id="menuControl"/>
+            <label class="btnMenu" for="menuControl">
+                <img src="img/menu_icon.png" id="btnMenu" width="70px" style="margin-top: 8px;"/>
+                <div class="menuBar" id="mBar">
+                    <a href="/"><div class="li-h">Главная</div></a>
+                    <a href="/"><div class="li-h">Кондуит</div></a>
+                    <div class="li-h">Картография</div>
+                    <div class="li-h exit">Выход</div>
+                    <div class="li-h"><img src="img/return.png" alt="" title="Close" width="100px" onclick="closeMenuBar()"></div>
+                </div>
+            </label>
+        </div>
+        <div class="menu">
+            <a href="/"><div class="el-h">Главная</div></a>
+            <div class="el-h">Кондуит</div>
+            <div class="el-h">Картография</div>
+            <div class="el-h exit">Выход</div>
+        </div>
+    </div>
+</div>
+<div style="height: 100px;"></div>
+
+<!-- TODO сделать боковую панель - так виден лого -->

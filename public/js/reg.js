@@ -44,7 +44,12 @@ function reg() {
             pass: r[5].value,
         }
         POST("/reg", data, (text) => {
-            console.log(text);
+            if(text != "OK"){
+                Alert(text);
+            }else{
+                Alert("Успешно!", () => {window.location.replace("/")})
+                console.log(text);
+            }
         })
     }
 }
@@ -79,9 +84,10 @@ function log() {
         POST("/log", data, (text) => {
             if(text != "OK"){
                 Alert(text);
+            }else{
+                Alert("Успешно!", () => {window.location.replace("/")})
+                console.log(text);
             }
-            Alert("Успешно!", () => {window.location.replace("/")})
-            console.log(text);
         })
     }
 }

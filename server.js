@@ -53,7 +53,13 @@ app.get("/", (req, res) => {
       if(err){
           res.send("Внутренняя ошибка")
       }else{
-        res.render("pages/main", {data: row[0]});
+        switch(row[0].role){
+          case null:
+            res.render("pages/main", {data: row[0]});
+          case "admin":
+            res.render("pages/teacher", {data: row[0]});
+        }
+        
       }
       
   })
@@ -69,7 +75,24 @@ app.post("/reg", (req, res) => {
         console.log(err);
         res.send("ERR");
       } else {
-        res.send("OK");
+
+        db.all("SELECT * FROM users WHERE name=? AND mail=? AND pass=?", [req.body.name, req.body.mail, req.body.pass], (err, row) => {
+          if (err) {
+            res.send("Внутренняя ошибка");
+          } else {
+            if (row[0]) {
+      
+              req.session.name = req.body.name
+              req.session.uid = row[0].uid
+      
+              res.send("OK");
+      
+            } else {
+              res.send("Внутренняя ошибка 2");
+            }
+          }
+        })
+
       }
     }
   );
