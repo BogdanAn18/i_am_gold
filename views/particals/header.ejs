@@ -73,7 +73,7 @@
     }
 
     .menuBar{
-        background: white;
+        background: rgb(255, 255, 255);
         border-left: 15px black solid;
         height: 100vh;
         right: -15px;
@@ -84,6 +84,7 @@
         display: block;
     }
     .li-h{
+        margin-left: 10px;
         margin-top: 20px;
     }
 </style>
@@ -92,18 +93,18 @@
 <div class="nav">
     <div class="cntr">
         <div class="el-h">
-            <img src="img/logo.jpg" alt="" srcset="" width="60px">
+            <img src="img/logo.jpg" alt="" srcset="" width="70px">
         </div>
         <div class="menu_icon">
             <input type="checkbox" id="menuControl"/>
             <label class="btnMenu" for="menuControl">
-                <img src="img/menu_icon.png" id="btnMenu" width="70px" style="margin-top: 8px;"/>
+                <img src="img/menu_icon.jpg" id="btnMenu" width="70px" style="margin-top: 8px;"/>
                 <div class="menuBar" id="mBar">
                     <a href="/"><div class="li-h">Главная</div></a>
                     <a href="/"><div class="li-h">Кондуит</div></a>
                     <div class="li-h">Картография</div>
-                    <div class="li-h exit">Выход</div>
-                    <div class="li-h"><img src="img/return.png" alt="" title="Close" width="100px" onclick="closeMenuBar()"></div>
+                    <div class="li-h exit" onclick='Alert("Вы уверены, что хотите выйти из аккаунта?", accountExit(),"Выйти");'>Выход</div>
+                    <div class="li-h"><img src="img/return.jpg" alt="" title="Close" width="100px" onclick="closeMenuBar()"></div>
                 </div>
             </label>
         </div>
@@ -111,10 +112,10 @@
             <a href="/"><div class="el-h">Главная</div></a>
             <div class="el-h">Кондуит</div>
             <div class="el-h">Картография</div>
-            <div class="el-h exit">Выход</div>
+            <div class="el-h exit" onclick='ExitAlert();'>Выход</div>
         </div>
     </div>
 </div>
 <div style="height: 100px;"></div>
 
-<!-- TODO сделать боковую панель - так виден лого -->
+<!-- ? Сделать боковую панель - так виден лого - СДЕЛАНО -->

@@ -9,7 +9,7 @@
 //   }
 //* не уверен, что проверка необходима на пароль, ввиду того, что там могут быть разные символы
 
-function reg() {
+async function reg() {
     err = false;
     r = document.getElementById("col_reg").children;
 
@@ -35,7 +35,6 @@ function reg() {
         err = true;
     }
 
-
     if (!err) {
         data = {
             name: r[2].value,
@@ -47,10 +46,20 @@ function reg() {
             if(text != "OK"){
                 Alert(text);
             }else{
-                Alert("Успешно!", () => {window.location.replace("/")})
-                console.log(text);
-            }
-        })
+                try {
+                    POST("/log", data, (text2) => {
+                        if(text2 != "OK"){
+                            Alert(text2);
+                        }else{
+                            Alert("Успешно!", () => {window.location.replace("/")})
+                            console.log(text2);
+                        }
+                    })
+                } catch (error1) {
+                    Alert("Не получилось автоматически вас отправить на главную страницу - войдите в аккаунт вручную, пожалуйста.")
+                    console.log(error1)
+                }
+        }})
     }
 }
 

@@ -53,49 +53,38 @@ app.get("/", (req, res) => {
       if(err){
           res.send("Внутренняя ошибка")
       }else{
-        switch(row[0].role){
-          case null:
-            res.render("pages/main", {data: row[0]});
+        switch(row[0].role){ 
+          //switch case после верно выполненного условия выполняет ВСЁ что идёт далее (до конца break/всего switch)
           case "admin":
             res.render("pages/teacher", {data: row[0]});
+            break;
+          case "teacher":
+            res.render("pages/teacher", {data: row[0]});
+            break;
+          case "student":
+            res.render("pages/student", {data: row[0]});
+            break;
+          default:
+            res.render("pages/wait", {data: row[0]});
+            break;
         }
-        
       }
-      
   })
 })
 
 //! ОБРАБОТКА ЗАПРОСОВ
 app.post("/reg", (req, res) => {
-  db.all(
+  db.run(
     `INSERT INTO users (name, surname, mail, pass) VALUES (?,?,?,?)`,
     [req.body.name, req.body.surname, req.body.mail, req.body.pass],
     (err, row) => {
       if (err) {
         console.log(err);
-        res.send("ERR");
+        res.send("Внутренняя ошибка");
       } else {
-
-        db.all("SELECT * FROM users WHERE name=? AND mail=? AND pass=?", [req.body.name, req.body.mail, req.body.pass], (err, row) => {
-          if (err) {
-            res.send("Внутренняя ошибка");
-          } else {
-            if (row[0]) {
-      
-              req.session.name = req.body.name
-              req.session.uid = row[0].uid
-      
-              res.send("OK");
-      
-            } else {
-              res.send("Внутренняя ошибка 2");
-            }
-          }
-        })
-
-      }
+        res.send("OK");
     }
-  );
+  });
 });
 
 
@@ -107,16 +96,23 @@ app.post('/log', (req, res) => {
     } else {
       if (row[0]) {
 
-        req.session.name = req.body.name
-        req.session.uid = row[0].uid
+        req.session.name = req.body.name;
+        req.session.uid = row[0].uid;
 
         res.send("OK");
 
       } else {
         res.send("Несуществующие данные");
+        
       }
     }
   })
+})
+
+app.post('/account_exit', (req, res) => {
+  req.session.name = "";
+  req.session.uid = "";
+  res.send("OK");
 })
 
 app.listen(port, () => {

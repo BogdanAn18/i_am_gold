@@ -1,9 +1,18 @@
 <div class="alert" id="alert" aria-hidden="true" hidden>
-
     <span id="alert_text">Ошибка</span>
-    <button class="alert_close" id="close_Alert_btn">Закрыть</button>  
-
+    <div class="btns">
+        <button class="alert_close" id="close_Alert_btn">Закрыть</button>  
+    </div>
 </div>
+
+<div class="alert" id="exit_alert" aria-hidden="true" hidden>
+    <span>Вы уверены, что хотите выйти из аккаунта?</span>
+    <div class="btns">
+        <button class="alert_btn" id="exit_Alert_btn">Да, выйти</button>
+        <button class="alert_close" id="exit_close_Alert_btn">Нет, не выходить</button>  
+    </div>
+</div>
+
 <div class="alert_shadow" id="alert_shadow" aria-hidden="true" hidden></div>
 
 <style>
@@ -24,14 +33,26 @@
         z-index: 99;
     }
 
+    .btns{
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
+    }
+
+    .alert_btn{
+        font-family: "Jost", serif;
+        font-optical-sizing: auto;
+        font-weight: 300;
+        font-size: 20px;
+        background: #ffffff;
+        color: rgb(0, 0, 0);
+    }
+
     .alert_close{
         font-family: "Jost", serif;
         font-optical-sizing: auto;
         font-weight: 300;
-        position: absolute;
         font-size: 20px;
-        right: 10px;
-        bottom: 10px;
         background: #000;
         color: white;
     }
@@ -50,16 +71,50 @@
 </style>
 
 <script>
-    function Alert(text, callback = () => {}){
-        document.getElementById('alert_text').innerHTML = text;
-        document.getElementById('alert_shadow').hidden = false;
-        document.getElementById('alert').hidden = false;
 
+    alert_shadow = document.getElementById('alert_shadow');
+    exit_alert = document.getElementById('exit_alert');
+    my_alert = document.getElementById('alert');
+
+    function Alert(text, callback = () => {}){
+        exit_alert.hidden = true;
+
+        document.getElementById('alert_text').innerHTML = text; //текст сообщения
         close_Alert_btn = document.getElementById("close_Alert_btn");
+
+        alert_shadow.hidden = false;
+        my_alert.hidden = false;
+        
+        //ставим кнопку закрытия
         close_Alert_btn.addEventListener('click', () => {
-            document.getElementById('alert_shadow').hidden = true;
-            document.getElementById('alert').hidden = true;
+            alert_shadow.hidden = true;
+            my_alert.hidden = true;
             callback();
+        });
+    }
+
+    function ExitAlert() {
+        my_alert.hidden = true; //выключаем другой алерт
+
+        alert_shadow.hidden = false;
+        exit_alert.hidden = false; //включаем наш алерт
+
+        exit_Alert_btn = document.getElementById("exit_Alert_btn"); //ставим обработчик на кнопку
+        exit_Alert_btn.addEventListener('click', () => {
+            POST('/account_exit', {}, (text) => {
+                if(text != "OK"){
+                    Alert(text);
+                }else{
+                    Alert("Успешно!", () => {window.location.replace("/")})
+                    console.log(text);
+                }
+            })
+        });
+
+        exit_close_Alert_btn = document.getElementById('exit_close_Alert_btn'); //ставим обработчик на другую кнопку
+        exit_close_Alert_btn.addEventListener('click', () => {
+            alert_shadow.hidden = true;
+            exit_alert.hidden = true;
         });
     }
 </script>
