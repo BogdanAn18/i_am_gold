@@ -4,7 +4,48 @@ body{
     font-weight: 400;
     font-style: normal;
     text-align: center;
+    font-size: 18px;
+    padding: 10px;
 }
 h1{
-    margin: 10px;
+    margin: 0px 0px 20px 0px;
+}
+.nav{
+    /* background-color: rgb(241, 128, 28); */
+    width: 100vw;
+    position: fixed;
+    display: inline-flex;
+    color: rgb(0, 0, 0);
+    left: 0px;
+    top: 0px;
+    font-family: "Jost", serif;
+    font-optical-sizing: auto;
+    font-weight: 800;
+    font-style: normal;
+    font-size: 24px;
+}
+.el-h{
+    vertical-align: auto;
+    padding: 5px;
+    text-decoration: none;
+}
+.logo{
+    left: 10px;
+}
+.cntr{
+    display: inline-flex;
+    width: 100%;
+}
+.menu{
+    width: 350px;
+    display: inline-flex;
+    margin-left: calc(50vw - 260px);
+    margin-top: 10px;
+    padding: auto;
+}
+.exit{
+    position: absolute;
+    right: 10px;
+    color: rgb(183, 3, 3);
+    cursor: pointer;
 }

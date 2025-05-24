@@ -56,7 +56,7 @@ app.get("/", (req, res) => {
         switch(row[0].role){ 
           //switch case после верно выполненного условия выполняет ВСЁ что идёт далее (до конца break/всего switch)
           case "admin":
-            res.render("pages/teacher", {data: row[0]});
+            res.render("pages/admin", {data: row[0]});
             break;
           case "teacher":
             res.render("pages/teacher", {data: row[0]});
