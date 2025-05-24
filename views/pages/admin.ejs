@@ -16,7 +16,30 @@
     <%- include("../particals/header") %>
     <%- include("../particals/alert") %>
     <h1>Всегда вам рады, <%= data.name %> </h1>
+
+    <!-- Вкладки -->
+    <div class="panel">
+        <button onclick="getUsers()" class="wow-button">Загрузить пользователей</button>
+        <button onclick="" class="wow-button">Получить премию</button>
+    </div>
+      
+    
+    <div id="table_cont" class="table_cont" hidden>
+        <table>
+        <thead>
+            <tr>
+                <th>Фамилия</th>
+                <th>Имя</th>
+                <th>Почта</th>
+                <th>Роль</th>
+            </tr>
+        </thead>
+        <tbody id="UsersData">
+        </tbody>
+        </table>
+    </div>
     
     <script src="js/lib.js"></script>
+    <script src="js/admin.js"></script>
 </body>
 </html>

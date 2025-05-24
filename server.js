@@ -92,7 +92,7 @@ app.post('/log', (req, res) => {
 
   db.all("SELECT * FROM users WHERE name=? AND mail=? AND pass=?", [req.body.name, req.body.mail, req.body.pass], (err, row) => {
     if (err) {
-      res.send("Внутрянняя ошибка");
+      res.send("Внутренняя ошибка");
     } else {
       if (row[0]) {
 
@@ -105,6 +105,26 @@ app.post('/log', (req, res) => {
         res.send("Несуществующие данные");
         
       }
+    }
+  })
+})
+
+app.post('/getUsers', (req, res) => {
+
+  db.all("SELECT uid,name,surname,mail,role FROM users", (err, row) => {
+  if (err) {
+    res.send("Внутренняя ошибка");
+  } else {
+    res.send(row);
+  }
+})})
+
+app.post('/changeRole', (req,res) => {
+  db.run("UPDATE users SET role = ? WHERE uid = ?", [req.body.role, req.body.uid], (err,row) => {
+    if (err) {
+      res.send("Внутренняя ошибка");
+    } else {
+      res.send("OK");
     }
   })
 })

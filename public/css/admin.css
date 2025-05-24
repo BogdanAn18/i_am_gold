@@ -4,3 +4,58 @@ body{
     font-weight: 400;
     font-style: normal;
 }
+h1{
+    margin-left: 20px;
+}
+table, th, td{
+    border: 1px black solid;
+    border-collapse: collapse;
+    padding: 5px;
+    font-size: 20px;
+}
+.table_cont{
+    margin-left: 20px;
+    max-height: 400px;
+    max-width: calc(100vw - 40px);
+    overflow-y: auto;
+    overflow-x: auto;
+    position: absolute;
+    left: 0px; 
+    z-index: -1;
+}
+.roletext{
+    border: none;
+    font-family: "Jost", serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-size: 20px;
+    width: 100px;
+    text-align: center;
+}
+
+.wow-button{
+    font-family: "Jost", serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-size: 20px;
+    text-align: center;
+    color: black;
+    background: white;
+    border: 1px black solid;
+    padding: 10px;
+    margin: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.wow-button:hover{
+    transition: 0.3s;
+    background: #000;
+    color: white;
+}
+
+.panel{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
