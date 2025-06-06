@@ -49,3 +49,59 @@ h1{
     color: rgb(183, 3, 3);
     cursor: pointer;
 }
+
+@keyframes fade-in{
+    0%{
+    opacity: 0;
+    }
+    70%{
+    opacity: 0;
+    }
+    100%{
+    opacity: 1;
+    }
+}
+
+@keyframes slide-in{
+    0%{
+        opacity: 0;
+        transform: translate3d(0, -100%, 0);
+        visibility: visible;
+    }
+    80%{
+        opacity: 0;
+        transform: translate3d(0, -100%, 0);
+        visibility: visible;
+    }
+    100%{
+        transform: translate3d(0, 0, 0);
+        opacity: 1;
+    }
+}
+
+@keyframes slide-in-down{
+    from{
+    transform: translate3d(0, 100%, 0);
+    visibility: visible;
+    }
+    to{
+    transform: translate3d(0, 0, 0);
+    }
+}
+
+h1{
+    animation: slide-in-down 2s;
+}
+#mystery{
+    animation: fade-in 3.5s;
+}
+.main_text{
+    animation: slide-in 7s;
+}
+#wait_img{
+    animation: fade-in 8s;
+    height: calc(100vh - 600px);
+    margin-top: 20px;
+}
+
+

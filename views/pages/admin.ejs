@@ -19,27 +19,70 @@
 
     <!-- Вкладки -->
     <div class="panel">
-        <button onclick="getUsers()" class="wow-button">Загрузить пользователей</button>
-        <button onclick="" class="wow-button">Получить премию</button>
+        <button onclick="uploadUsers()" class="wow-button">Загрузить пользователей</button>
+        <button onclick="uploadTheory()" class="wow-button">Загрузить теорию</button>
+        <button onclick="uploadExpirement()" class="wow-button">Загрузить практикум</button>
     </div>
       
-    
-    <div id="table_cont" class="table_cont" hidden>
-        <table>
-        <thead>
-            <tr>
-                <th>Фамилия</th>
-                <th>Имя</th>
-                <th>Почта</th>
-                <th>Роль</th>
-            </tr>
-        </thead>
-        <tbody id="UsersData">
-        </tbody>
-        </table>
+    <div class="container">
+
+        <div id="table_cont" class="table_cont" hidden>
+            <table>
+            <thead>
+                <tr>
+                    <th>Фамилия</th>
+                    <th>Имя</th>
+                    <th>Почта</th>
+                    <th>Роль</th>
+                </tr>
+            </thead>
+            <tbody id="UsersData">
+            </tbody>
+            </table>
+        </div>
+
+        <div id="Theory" class="Item" hidden>
+            <!-- <form action="/newTheory" method="post" enctype="multipart/form-data"> ... -->
+            <!-- * Сделано нормальное возвращение onclick="loadBack('/admin1234')"  -->
+            <h3>Теоретический блок</h3>
+
+            Название: <input type="text" id="theory_title_text"><br>
+            Тема: <input type="text" id="theory_text"><br>
+            Листочек (Файл): <input type="file" id="theory_file"><br>
+            
+            Или перетащите сюда листочек:
+            <div id="TheoryDropZone" class="dropZone" style="background-image: url('/img/download.png'); "></div>
+            <button class="wow-button" onclick="newTheory()">Отправить</button><br> 
+        </div>
+
+        <div id="Expirement" class="Item">
+            <h3>Практический блок</h3>
+
+            Название: <input type="text" id="expirement_title_text"><br>
+            Тема: <select id="expirement_theme_select" name="theme_select"></select><br>
+        
+            <div class="filesExpirement">
+                <div>
+                    <!-- EF - Expirement File -->
+                    Условие: <br> <input type="file" id="EF_Task"><br>
+                    <!-- EDZ - Expiremental Drop Zone -->
+                    <div id="EDZ_Task" class="dropZone" style="background-image: url('/img/download.png'); "></div>
+                </div>
+                <div>
+                    Решение (если есть): <br> <input type="file" id="EF_Sol"><br>
+                    <div id="EDZ_Sol" class="dropZone" style="background-image: url('/img/download.png'); "></div>
+                </div>
+                <div>
+                    Критерии (если есть): <br> <input type="file" id="EF_Criteria"><br>
+                    <div id="EDZ_Criteria" class="dropZone" style="background-image: url('/img/download.png'); "></div>
+                </div>
+            </div>
+            <button class="wow-button" onclick="newExpirement()">Отправить</button><br> 
+        </div>
     </div>
-    
+
     <script src="js/lib.js"></script>
     <script src="js/admin.js"></script>
+
 </body>
 </html>

@@ -1,5 +1,7 @@
 const express = require("express");
-
+const multer = require('multer');
+const uploadT = multer({ dest: 'uploads/theory' });
+const uploadE = multer({ dest: 'uploads/experiment' });
 
 const app = express();
 const port = 3000;
@@ -10,6 +12,7 @@ const db = new sqlite3.Database("db.db");
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());  
 app.use(bodyParser.urlencoded({ dest: "upload/", extended: false })); 
+
 //* заставляет читать body, изначальная библиотека Node.js
 //* "Модуль body-parser необходим для корректной обработки передаваемых в теле данных."
 
@@ -110,6 +113,10 @@ app.post('/log', (req, res) => {
 })
 
 app.post('/getUsers', (req, res) => {
+  if (!req.session.uid) {
+    res.render("pages/reg");
+    return
+  }
 
   db.all("SELECT uid,name,surname,mail,role FROM users", (err, row) => {
   if (err) {
@@ -120,6 +127,11 @@ app.post('/getUsers', (req, res) => {
 })})
 
 app.post('/changeRole', (req,res) => {
+  if (!req.session.uid) {
+    res.render("pages/reg");
+    return
+  }
+
   db.run("UPDATE users SET role = ? WHERE uid = ?", [req.body.role, req.body.uid], (err,row) => {
     if (err) {
       res.send("Внутренняя ошибка");
@@ -129,11 +141,56 @@ app.post('/changeRole', (req,res) => {
   })
 })
 
+app.post("/newTheory", uploadT.single("file"), function (req, res, next) {
+  if (!req.session.uid) {
+    res.render("pages/reg");
+    return
+  }
+
+  db.run(
+    `INSERT INTO theory (title, mtext, image) VALUES (?,?,?)`,
+    [req.body.title, req.body.text, req.file.path], //можно также filename чтобы хранить чисто имя
+    (err) => {
+      if (err) {
+        console.log(err);
+        res.send("Внутренняя ошибка");
+      } else {
+        // res.send(`Загружено! <a href="/admin1234">Нажите чтобы вернуться</a>`);
+        res.send("OK");
+      }
+    }
+  );
+});
+
+
+app.post("/newExpirement", uploadE.single("file"), function (req, res, next) {
+  if (!req.session.uid) {
+    res.render("pages/reg");
+    return
+  }
+
+  db.run(
+    `INSERT INTO expirement (title, theme, file, solution, criteria) VALUES (?,?,?,?,?)`,
+    [req.body.title, req.body.theme, req.file.path], //можно также filename чтобы хранить чисто имя
+    (err) => {
+      if (err) {
+        console.log(err);
+        res.send("Внутренняя ошибка");
+      } else {
+        // res.send(`Загружено! <a href="/admin1234">Нажите чтобы вернуться</a>`);
+        res.send("OK");
+      }
+    }
+  );
+});
+
 app.post('/account_exit', (req, res) => {
   req.session.name = "";
   req.session.uid = "";
   res.send("OK");
 })
+
+
 
 app.listen(port, () => {
     console.log(`App listening on port ${port}`);

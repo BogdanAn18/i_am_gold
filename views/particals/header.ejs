@@ -1,4 +1,14 @@
 <style>
+    @keyframes slide-in-left{
+        from{
+        transform: translate3d(-100%, 0, 0);
+        visibility: visible;
+        }
+        to{
+        transform: translate3d(0, 0, 0);
+        }
+    }
+
     .nav{
         /* background-color: rgb(241, 128, 28); */
         width: 100vw;
@@ -6,7 +16,6 @@
         display: inline-flex;
         color: rgb(0, 0, 0);
         left: 0px;
-        top: 0px;
         /* box-shadow: 
             0px 10px rgb(255, 182, 119),
             0px -10px rgb(255, 182, 119); */
@@ -14,7 +23,7 @@
         font-optical-sizing: auto;
         font-weight: 800;
         font-style: normal;
-        font-size: 24px;
+        font-size: 24px;   
     }
     .el-h, .li-h{
         vertical-align: auto;
