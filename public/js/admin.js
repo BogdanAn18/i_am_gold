@@ -117,15 +117,21 @@ function newTheory(){
 //* Отправка праков на сервер
 
 function newExpirement(){
-    Expirement_file = document.getElementById('expirement_file').files[0];
+    EF_Task = document.getElementById('EF_Task').files[0];
+    EF_Sol = document.getElementById('EF_Sol').files[0];
+    EF_Criteria = document.getElementById('EF_Criteria').files[0];
     title =  document.getElementById('expirement_title_text');
-    text = document.getElementById('expirement_text');
+    theme = document.getElementById('expirement_theme_select');
 
     const formData = new FormData();
 
+    EFiles = [EF_Task,EF_Sol,EF_Criteria];
+
     formData.append("title", title.value);
-    formData.append("text", text.value);
-    formData.append("file", Expirement_file);
+    formData.append("theme", theme.selectedIndex);
+    formData.append("EFiles", EF_Task);
+    formData.append("EFiles", EF_Sol);
+    formData.append("EFiles", EF_Criteria);
 
     fetch('/newExpirement', {
         method: 'POST',

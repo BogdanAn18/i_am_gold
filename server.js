@@ -45,35 +45,40 @@ app.use(session(
 
 //также ввиду того, что uid может быть украден, он храниться через сессии
 
-//! БЛОК РЕНДЕРА
+//! ЧИСТО ДЛЯ ВЕРСТКИ - ПОТОМ УБРАТЬ!
 app.get("/", (req, res) => {
-  if (!req.session.uid) {
-      res.render("pages/reg");
-      return
-    }
-
-  db.all("SELECT * FROM users WHERE uid = ?", [req.session.uid], (err,row)=>{
-      if(err){
-          res.send("Внутренняя ошибка")
-      }else{
-        switch(row[0].role){ 
-          //switch case после верно выполненного условия выполняет ВСЁ что идёт далее (до конца break/всего switch)
-          case "admin":
-            res.render("pages/admin", {data: row[0]});
-            break;
-          case "teacher":
-            res.render("pages/teacher", {data: row[0]});
-            break;
-          case "student":
-            res.render("pages/student", {data: row[0]});
-            break;
-          default:
-            res.render("pages/wait", {data: row[0]});
-            break;
-        }
-      }
-  })
+  req.session.uid = 16;
+  res.render("pages/admin", {data: [16, "Богдан"]});
 })
+//! БЛОК РЕНДЕРА
+// app.get("/", (req, res) => {
+//   if (!req.session.uid) {
+//       res.render("pages/reg");
+//       return
+//     }
+
+//   db.all("SELECT * FROM users WHERE uid = ?", [req.session.uid], (err,row)=>{
+//       if(err){
+//           res.send("Внутренняя ошибка")
+//       }else{
+//         switch(row[0].role){ 
+//           //switch case после верно выполненного условия выполняет ВСЁ что идёт далее (до конца break/всего switch)
+//           case "admin":
+//             res.render("pages/admin", {data: row[0]});
+//             break;
+//           case "teacher":
+//             res.render("pages/teacher", {data: row[0]});
+//             break;
+//           case "student":
+//             res.render("pages/student", {data: row[0]});
+//             break;
+//           default:
+//             res.render("pages/wait", {data: row[0]});
+//             break;
+//         }
+//       }
+//   })
+// })
 
 //! ОБРАБОТКА ЗАПРОСОВ
 app.post("/reg", (req, res) => {
@@ -163,15 +168,14 @@ app.post("/newTheory", uploadT.single("file"), function (req, res, next) {
 });
 
 
-app.post("/newExpirement", uploadE.single("file"), function (req, res, next) {
+app.post("/newExpirement", uploadE.array("EFiles", 3), function (req, res, next) {
   if (!req.session.uid) {
     res.render("pages/reg");
     return
   }
-
   db.run(
     `INSERT INTO expirement (title, theme, file, solution, criteria) VALUES (?,?,?,?,?)`,
-    [req.body.title, req.body.theme, req.file.path], //можно также filename чтобы хранить чисто имя
+    [req.body.title, req.body.theme, req.files[0].path, req.files[1].path, req.files[2].path], //path - ПОЛНЫЙ ПУТЬ, можно также filename чтобы хранить чисто имя
     (err) => {
       if (err) {
         console.log(err);
